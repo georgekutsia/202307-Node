@@ -52,4 +52,14 @@ const deleteUser = async (req, res) => {
     return res.status(500).json(error);
   }
 };
-module.exports = { getUsers, newUser, updateUser, deleteUser };
+const getUserByCity = async (req, res) => {
+  try {
+    const { cityName } = req.params;
+    const userByCity = await User.find({ city: cityName }); // busco en la BD los usuarios de la ciudad enviada a traves de los params
+    return res.status(200).json(userByCity);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
+module.exports = { getUsers, newUser, updateUser, deleteUser, getUserByCity };
